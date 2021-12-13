@@ -20,10 +20,12 @@ const config: IdentityVaultConfig = {
   unlockVaultOnLoad: false,
   iosBiometricsLocalizedFallbackTitle:"Use Password"
 };
-const key = "sessionData";
+const usernameKey = "username";
+const PasswordKey = "password"
 
 export interface VaultServiceState {
-  session: string;
+  username: string;
+  password: string;
   isLocked: boolean;
   privacyScreen: boolean;
   lockType: "NoLocking" | "Biometrics" | "SystemPasscode" | "Both";
@@ -36,9 +38,10 @@ export interface VaultServiceState {
 @Injectable({ providedIn: "root" })
 export class VaultService {
   public state: VaultServiceState = {
-    session: "",
+    username: "",
+    password: "",  
     isLocked: false,
-    privacyScreen: false,
+    privacyScreen: true,
     lockType: "Both",
     canUseBiometrics: false,
     canUseBoth: false,
@@ -53,7 +56,8 @@ export class VaultService {
     this.vault.onLock(() => {
       this.ngZone.run(() => {
         this.state.isLocked = true;
-        this.state.session = undefined;
+        this.state.username = undefined;
+        this.state.password = undefined;
       });
     });
 
@@ -87,15 +91,25 @@ export class VaultService {
     this.state.vaultExists = await this.vault.doesVaultExist();
   }
 
-  async setSession(value: string): Promise<void> {
-    this.state.session = value;
-    await this.vault.setValue(key, value);
+  async setSession(username: string, password:string): Promise<void> {
+    this.state.username = username;
+    this.state.password = password;
+    await this.vault.setValue(usernameKey, username);
+    await this.vault.setValue(PasswordKey, password);
+    this.state.lockType = "Both";
+    await this.setLockType();
+    await this.vault.lock();
     this.state.vaultExists = await this.vault.doesVaultExist();
   }
 
   async restoreSession() {
-    const value = await this.vault.getValue(key);
-    this.state.session = value;
+    const username = await this.vault.getValue(usernameKey);
+    const password = await this.vault.getValue(usernameKey);
+    this.state.vaultExists = await this.vault.doesVaultExist();
+    return {
+      username,
+      password
+    }
   }
 
   async lockVault() {
@@ -114,7 +128,6 @@ export class VaultService {
   async setLockType() {
     let type: VaultType;
     let deviceSecurityType: DeviceSecurityType;
-
     switch (this.state.lockType) {
       case "Biometrics":
         type = VaultType.DeviceSecurity;
@@ -126,14 +139,10 @@ export class VaultService {
         deviceSecurityType = DeviceSecurityType.SystemPasscode;
         break;
 
-        case "Both":
+        default:
         type = VaultType.DeviceSecurity;
         deviceSecurityType = DeviceSecurityType.Both;
         break;
-
-      default:
-        type = VaultType.SecureStorage;
-        deviceSecurityType = DeviceSecurityType.None;
     }
     await this.vault.updateConfig({ ...this.vault.config, type, deviceSecurityType });
   }
@@ -141,7 +150,8 @@ export class VaultService {
   async clearVault() {
     await this.vault.clear();
     this.state.lockType = "NoLocking";
-    this.state.session = undefined;
-    this.state.vaultExists = await this.vault.doesVaultExist();
+    this.state.username = undefined;
+    this.state.password = undefined;
+    this.state.vaultExists = await this.vault.isEmpty();
   }
 }

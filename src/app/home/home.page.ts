@@ -8,17 +8,25 @@ import { VaultService, VaultServiceState } from "../vault.service";
 })
 export class HomePage {
   public state: VaultServiceState;
-
+  biometric:boolean = false;
   constructor(private vaultService: VaultService) {
     this.state = vaultService.state;
   }
 
-  async setSession(data: string) {
-    await this.vaultService.setSession(data);
+  async setSession() {
+    if(this.biometric){
+      await this.vaultService.setSession(this.state.username,this.state.password);
+    }
   }
 
   async restoreSession() {
-    await this.vaultService.restoreSession();
+    const res = await this.vaultService.restoreSession();
+    this.state.username = res.username;
+    this.state.password = res.password;
+  }
+
+  async refresh(){
+    await this.restoreSession();
   }
 
   lockVault() {
