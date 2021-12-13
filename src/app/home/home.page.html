@@ -15,31 +15,30 @@
 
   <ion-list>
     <ion-item>
-      <ion-label position="floating">Enter the "session" data</ion-label>
-      <ion-input [(ngModel)]="state.session"></ion-input>
+      <ion-label position="floating">Enter the Username</ion-label>
+      <ion-input [(ngModel)]="state.username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Enter the Password</ion-label>
+      <ion-input [(ngModel)]="state.password"></ion-input>
     </ion-item>
 
     <ion-item>
       <div style="flex: auto;">
-        <ion-button expand="block" (click)="setSession(state.session)">Set Session Data</ion-button>
+        <ion-button expand="block" (click)="setSession()">Login</ion-button>
       </div>
     </ion-item>
 
     <ion-item>
       <div style="flex: auto;">
-        <ion-button expand="block" (click)="restoreSession()">Restore Session Data</ion-button>
+        <ion-button expand="block" (click)="refresh()">Re-store</ion-button>
       </div>
     </ion-item>
 
     <ion-item>
       <div style="flex: auto;">
-        <ion-button expand="block" (click)="lockVault()">Lock Vault</ion-button>
-      </div>
-    </ion-item>
-
-    <ion-item>
-      <div style="flex: auto;">
-        <ion-button expand="block" (click)="unlockVault()">Unlock Vault</ion-button>
+        <ion-toggle [(ngModel)]="biometric">Touch/Face ID</ion-toggle>
       </div>
     </ion-item>
 
@@ -49,42 +48,9 @@
     </ion-item>
 
     <ion-item>
-      <ion-radio-group [(ngModel)]="state.lockType" (ionChange)="setLockType()">
-        <ion-list-header>
-          <ion-label> Vault Locking Mechanism </ion-label>
-        </ion-list-header>
-
-        <ion-item>
-          <ion-label>Do Not Lock</ion-label>
-          <ion-radio value="NoLocking"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Use Biometrics</ion-label>
-          <ion-radio [disabled]="!state.canUseBiometrics" value="Biometrics"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Use System Passcode</ion-label>
-          <ion-radio [disabled]="!state.canUsePasscode" value="SystemPasscode"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-          <ion-label>Use Both</ion-label>
-          <ion-radio [disabled]="!state.canUseBoth" value="Both"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
-    </ion-item>
-
-    <ion-item>
-      <div style="flex: auto;">
-        <ion-button expand="block" (click)="clearVault()">Clear Vault</ion-button>
-      </div>
-    </ion-item>
-
-    <ion-item>
       <ion-label>
-        <div>Session Data: {{ state.session }}</div>
+        <div>username : {{ state.username }}</div>
+        <div>password : {{ state.password }}</div>
         <div>Vault is locked: {{ state.isLocked }}</div>
         <div>Vault exists: {{ state.vaultExists }}</div>
       </ion-label>
