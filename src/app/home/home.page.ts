@@ -29,23 +29,23 @@ export class HomePage {
     await this.restoreSession();
   }
 
-  lockVault() {
-    this.vaultService.lockVault();
+  async lockVault() {
+    await this.vaultService.lockVault();
   }
 
-  unlockVault() {
-    this.vaultService.unlockVault();
+  async unlockVault() {
+    await this.vaultService.unlockVault();
   }
 
-  setLockType() {
-    this.vaultService.setLockType();
+  async setLockType() {
+    await this.vaultService.setLockType();
   }
 
   setPrivacyScreen() {
     this.vaultService.setPrivacyScreen(this.state.privacyScreen);
   }
 
-  clearVault() {
-    this.vaultService.clearVault();
+  async clearVault() {
+    await this.vaultService.clearVault();
   }
 }
