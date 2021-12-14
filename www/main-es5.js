@@ -120,7 +120,7 @@
       /* harmony import */
 
 
-      var _Users_rachayya_kallimath_Documents_Sample_identity_Project_getting_started_iv_angular_Identity_vault_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      var _Users_i711243_Desktop_projects_Duplicate_Projects_Identity_vault_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! !./node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./app.component.html */
       75158);
       /* harmony import */
@@ -146,7 +146,7 @@
 
       _AppComponent = (0, tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([(0, _angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
         selector: 'app-root',
-        template: _Users_rachayya_kallimath_Documents_Sample_identity_Project_getting_started_iv_angular_Identity_vault_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
+        template: _Users_i711243_Desktop_projects_Duplicate_Projects_Identity_vault_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_app_component_scss__WEBPACK_IMPORTED_MODULE_1__]
       })], _AppComponent);
       /***/
