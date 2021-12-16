@@ -8,7 +8,7 @@ import { VaultService, VaultServiceState } from "../vault.service";
 })
 export class HomePage {
   public state: VaultServiceState;
-  biometric:boolean = false;
+  biometric:boolean = true;
   constructor(private vaultService: VaultService) {
     this.state = vaultService.state;
   }
