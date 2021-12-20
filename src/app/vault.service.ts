@@ -12,7 +12,7 @@ import { Platform } from "@ionic/angular";
 const config: IdentityVaultConfig = {
   key: "com.ing.rs.ingretire",
   type: VaultType.DeviceSecurity,
-  deviceSecurityType: DeviceSecurityType.Biometrics,
+  deviceSecurityType: DeviceSecurityType.Both,
   lockAfterBackgrounded: 2000,
   shouldClearVaultAfterTooManyFailedAttempts: true,
   customPasscodeInvalidUnlockAttempts: 2,
@@ -56,6 +56,9 @@ export class VaultService {
   async init() {
     await this.platform.ready(); // This is required only for Cordova
     this.vault = new Vault(config);
+
+    this.state.lockType = 'Both';
+    await this.setLockType();
 
     this.vault.onLock(() => {
       this.ngZone.run(() => {
