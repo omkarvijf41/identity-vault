@@ -60,5 +60,15 @@
         <div>Vault is empty: {{ state.vaultIsEmpty }}</div>
       </ion-label>
     </ion-item>
+    <ion-item>
+      <ion-label>Action Sheet</ion-label>
+      <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
+        <ion-select-option value="red">Red</ion-select-option>
+        <ion-select-option value="green">Green</ion-select-option>
+        <ion-select-option value="blue">Blue</ion-select-option>
+      </ion-select>
+    </ion-item>
   </ion-list>
+  
+  
 </ion-content>

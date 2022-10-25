@@ -10,7 +10,7 @@ import { Platform } from "@ionic/angular";
 
 
 const config: IdentityVaultConfig = {
-  key: "com.ing.rs.ingretire",
+  key: "io.ionic.gettingstartedivangular",
   type: VaultType.DeviceSecurity,
   deviceSecurityType: DeviceSecurityType.Both,
   lockAfterBackgrounded: 2000,

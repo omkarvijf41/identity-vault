@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "555783996165",
+    "project_id": "mobile-app-prod",
+    "storage_bucket": "mobile-app-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555783996165:android:1c8f3b83f14b54f1f62d6c",
+        "android_client_info": {
+          "package_name": "io.ionic.gettingstartedivangular"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555783996165-isrjfm3ol7biv4lfqfc9uh2vjl9iseov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK_dbXNq6XQBcQWjGUwRIjoiARBkwPPtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555783996165-isrjfm3ol7biv4lfqfc9uh2vjl9iseov.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "555783996165-f5c2chaf4regsm47p8vfhun8agbbboip.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ing.rs.retire.nycdcp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:555783996165:android:4909fe2a10b822adf62d6c",
+        "android_client_info": {
+          "package_name": "com.ing.rs.retire.nycdcp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "555783996165-isrjfm3ol7biv4lfqfc9uh2vjl9iseov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK_dbXNq6XQBcQWjGUwRIjoiARBkwPPtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "555783996165-isrjfm3ol7biv4lfqfc9uh2vjl9iseov.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "555783996165-f5c2chaf4regsm47p8vfhun8agbbboip.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ing.rs.retire.nycdcp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
