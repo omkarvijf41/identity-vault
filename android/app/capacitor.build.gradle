@@ -2,17 +2,20 @@
 
 android {
   compileOptions {
-      sourceCompatibility JavaVersion.VERSION_1_8
-      targetCompatibility JavaVersion.VERSION_1_8
+      sourceCompatibility JavaVersion.VERSION_11
+      targetCompatibility JavaVersion.VERSION_11
   }
 }
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':capacitor-app')
-    implementation project(':capacitor-haptics')
+    implementation project(':capacitor-device')
+    implementation project(':capacitor-filesystem')
     implementation project(':capacitor-keyboard')
-
+    implementation project(':capacitor-status-bar')
+    implementation "com.google.android.play:core:1.+"
+    implementation "androidx.appcompat:appcompat:1.3.1"
 }
 apply from: "../../node_modules/@ionic-enterprise/identity-vault/src/android/ionicnativeauth.gradle"
 

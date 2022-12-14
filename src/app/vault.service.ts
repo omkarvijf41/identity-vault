@@ -10,14 +10,13 @@ import { Platform } from "@ionic/angular";
 
 
 const config: IdentityVaultConfig = {
-  key: "com.ing.rs.ingretire",
-  type: VaultType.SecureStorage,
-  deviceSecurityType: DeviceSecurityType.Biometrics,
+  key: "io.ionic.gettingstartedivangular",
+  type: VaultType.DeviceSecurity,
+  deviceSecurityType: DeviceSecurityType.Both,
   lockAfterBackgrounded: 2000,
   shouldClearVaultAfterTooManyFailedAttempts: true,
   customPasscodeInvalidUnlockAttempts: 2,
-  unlockVaultOnLoad: false,
-
+  unlockVaultOnLoad: false
 };
 const userNameKey = "username";
 const userPasswordKey = "password";
@@ -30,11 +29,13 @@ export interface VaultServiceState {
   lockType: "NoLocking" | "Biometrics" | "SystemPasscode" | "Both";
   canUseBiometrics: boolean;
   canUsePasscode: boolean;
-  vaultExists: boolean;
+  vaultIsEmpty: boolean;
 }
 
-@Injectable({ providedIn: "root" })
-export class IdentityService {
+@Injectable({
+  providedIn: 'root'
+})
+export class VaultService {
   public state: VaultServiceState = {
     username: "",
     password: "",
@@ -43,7 +44,7 @@ export class IdentityService {
     lockType: "Biometrics",
     canUseBiometrics: false,
     canUsePasscode: false,
-    vaultExists: false,
+    vaultIsEmpty: true,
   };
 
   vault: Vault;
@@ -55,6 +56,9 @@ export class IdentityService {
   async init() {
     await this.platform.ready(); // This is required only for Cordova
     this.vault = new Vault(config);
+
+    this.state.lockType = 'Both';
+    await this.setLockType();
 
     this.vault.onLock(() => {
       this.ngZone.run(() => {
@@ -74,7 +78,7 @@ export class IdentityService {
     this.state.privacyScreen =  await Device.isHideScreenOnBackgroundEnabled();
     this.state.canUseBiometrics = await Device.isBiometricsEnabled();
     this.state.canUsePasscode = await Device.isSystemPasscodeSet();
-    this.state.vaultExists = await this.vault.isEmpty();
+    this.state.vaultIsEmpty = await this.vault.isEmpty();
   }
 
   async setSession(username: string, password: string): Promise<void> {
@@ -82,7 +86,7 @@ export class IdentityService {
     this.state.password = password;
     await this.vault.setValue(userNameKey, username);
     await this.vault.setValue(userPasswordKey, password);
-    this.state.vaultExists = await this.vault.isEmpty();
+    this.state.vaultIsEmpty = await this.vault.isEmpty();
   }
 
   async restoreSession() {
@@ -148,11 +152,11 @@ export class IdentityService {
     this.state.lockType = "NoLocking";
     this.state.username = undefined;
     this.state.password = undefined;
-    this.state.vaultExists = await this.vault.isEmpty();
+    this.state.vaultIsEmpty = await this.vault.isEmpty();
   }
 
   async doesVaultExistInApp() {
-    this.state.vaultExists = await this.vault.isEmpty();
+    this.state.vaultIsEmpty = await this.vault.isEmpty();
   }
 }
 

@@ -8,9 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'register-ssn-eid',
     pathMatch: 'full'
   },
+  {
+    path: 'register-ssn-eid',
+    loadChildren: () =>
+      import('./register-ssn-eid.page/register-ssn-eid.module').then(
+        m => m.RegisterSsnEidPageModule
+      )
+  }
 ];
 
 @NgModule({
